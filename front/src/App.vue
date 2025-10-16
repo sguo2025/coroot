@@ -196,9 +196,9 @@
                         </template>
                         <template v-else-if="status.node_agent.status !== 'ok'">
                             <div class="flex-grow-1 mb-3 mb-sm-0">
-                                No metrics found. If you just installed Coroot and node-agent, please wait a couple minutes for it to collect data.
+                                未找到指标数据。如果您刚刚安装了Coroot和node-agent，请等待几分钟以收集数据。
                                 <br />
-                                If you haven't installed node-agent, please do so now.
+                                如果您尚未安装node-agent，请立即进行安装。
                             </div>
                             <AgentInstallation outlined>Install node-agent</AgentInstallation>
                         </template>
