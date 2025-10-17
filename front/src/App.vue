@@ -68,10 +68,10 @@
                                     <v-icon dark>mdi-hexagon-multiple</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content class="pa-0">
-                                    <v-list-item-subtitle class="mb-0">Project</v-list-item-subtitle>
+                                    <v-list-item-subtitle class="mb-0">项目</v-list-item-subtitle>
                                     <v-list-item-title style="line-height: inherit">
                                         <template v-if="project">{{ project.name }}</template>
-                                        <template v-else>choose a project</template>
+                                        <template v-else>选择项目</template>
                                     </v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
@@ -81,9 +81,9 @@
                                 {{ p.name }}
                             </v-list-item>
                             <v-list-item v-if="!user.readonly" :to="{ name: 'project_new' }" exact>
-                                <v-icon small class="mr-1">mdi-plus</v-icon> new project
+                                <v-icon small class="mr-1">mdi-plus</v-icon> 新建项目
                             </v-list-item>
-                            <v-list-item v-else-if="!projects.length"> no projects available </v-list-item>
+                            <v-list-item v-else-if="!projects.length"> 暂无项目 </v-list-item>
                         </v-list>
                     </v-menu>
 
@@ -91,7 +91,7 @@
                         <v-list-item-icon class="mr-3">
                             <v-icon dark>mdi-cog</v-icon>
                         </v-list-item-icon>
-                        <v-list-item-content> Settings </v-list-item-content>
+                        <v-list-item-content> 设置 </v-list-item-content>
                     </v-list-item>
 
                     <!-- v-menu.eager is necessary to apply the selected theme -->
@@ -119,8 +119,8 @@
                             <ThemeSelector />
                             <template v-if="user && !user.anonymous">
                                 <v-divider class="my-2" />
-                                <v-list-item @click="changePassword = true">Change password</v-list-item>
-                                <v-list-item :to="{ name: 'logout' }">Sign out</v-list-item>
+                                <v-list-item @click="changePassword = true">修改密码</v-list-item>
+                                <v-list-item :to="{ name: 'logout' }">退出登录</v-list-item>
                             </template>
                         </v-list>
                     </v-menu>
@@ -131,12 +131,12 @@
                                 <v-list-item-icon class="mr-3">
                                     <v-icon dark>mdi-help-circle-outline</v-icon>
                                 </v-list-item-icon>
-                                <v-list-item-content>Help</v-list-item-content>
+                                <v-list-item-content>帮助</v-list-item-content>
                             </v-list-item>
                         </template>
                         <v-list dense class="pa-0">
                             <v-list-item href="https://docs.coroot.com/" target="_blank">
-                                <v-icon small class="mr-1">mdi-book-open-outline</v-icon>Documentation</v-list-item
+                                <v-icon small class="mr-1">mdi-book-open-outline</v-icon>文档中心</v-list-item
                             >
                             <v-list-item href="https://github.com/coroot/coroot" target="_blank">
                                 <v-icon small class="mr-1">mdi-github</v-icon>GitHub
@@ -145,9 +145,9 @@
                                 <v-icon small class="mr-1">mdi-slack</v-icon>Slack chat
                             </v-list-item>
                             <v-divider />
-                            <v-list-item> Coroot Edition: {{ $coroot.edition }} </v-list-item>
+                            <v-list-item> 根因分析先锋版本: {{ $coroot.edition }} </v-list-item>
                             <v-list-item href="https://github.com/coroot/coroot/releases" target="_blank">
-                                Version: {{ $coroot.version }}
+                                Version: 1.0
                             </v-list-item>
                         </v-list>
                     </v-menu>
@@ -157,7 +157,7 @@
                             <v-icon v-if="menuCollapsed" dark>mdi-chevron-right</v-icon>
                             <v-icon v-else dark>mdi-chevron-left</v-icon>
                         </v-list-item-icon>
-                        <v-list-item-content> Collapse </v-list-item-content>
+                        <v-list-item-content> 折叠 </v-list-item-content>
                     </v-list-item>
                 </v-list>
             </template>
@@ -189,10 +189,10 @@
                                 outlined
                                 :to="{ name: 'project_settings', params: { tab: 'prometheus' } }"
                             >
-                                <template v-if="status.prometheus.error"> Review the configuration </template>
-                                <template v-else> Configure </template>
+                                <template v-if="status.prometheus.error"> 审查配置 </template>
+                                <template v-else> 配置 </template>
                             </v-btn>
-                            <v-btn v-if="status.prometheus.action === 'wait'" outlined @click="refresh">refresh</v-btn>
+                            <v-btn v-if="status.prometheus.action === 'wait'" outlined @click="refresh">刷新</v-btn>
                         </template>
                         <template v-else-if="status.node_agent.status !== 'ok'">
                             <div class="flex-grow-1 mb-3 mb-sm-0">
@@ -204,10 +204,10 @@
                         </template>
                         <template v-else-if="status.kube_state_metrics && status.kube_state_metrics.status !== 'ok'">
                             <div class="flex-grow-1 mb-3 mb-sm-0">
-                                It looks like you use Kubernetes, so Coroot requires <b>kube-state-metrics</b>
-                                to combine individual containers into applications.
+                                看起来您使用的是 Kubernetes, 所以根因分析先锋需要 <b>kube-state-metrics</b>
+                                将单个容器组合为应用程序。
                             </div>
-                            <v-btn outlined :to="{ name: 'project_settings' }">Install kube-state-metrics</v-btn>
+                            <v-btn outlined :to="{ name: 'project_settings' }">安装 kube-state-metrics</v-btn>
                         </template>
                     </div>
                 </v-alert>

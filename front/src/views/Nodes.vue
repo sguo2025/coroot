@@ -3,7 +3,7 @@
         <Table v-if="nodes && nodes.rows" :header="nodes.header" :rows="nodes.rows" />
         <NoData v-else-if="!loading && !error" />
         <div class="mt-4">
-            <AgentInstallation color="primary">Add nodes</AgentInstallation>
+            <AgentInstallation color="primary">添加节点</AgentInstallation>
         </div>
     </Views>
 </template>

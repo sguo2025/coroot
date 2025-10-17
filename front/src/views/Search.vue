@@ -2,7 +2,7 @@
     <v-dialog v-model="dialog" max-width="600" scrollable>
         <v-card class="pa-4">
             <div class="d-flex align-center text-h6 mb-3">
-                <div>Search for apps and nodes</div>
+                <div>搜索应用和节点</div>
                 <v-spacer />
                 <v-btn icon @click="dialog = false"><v-icon>mdi-close</v-icon></v-btn>
             </div>
@@ -18,7 +18,7 @@
                     {{ error }}
                 </v-alert>
 
-                <div v-else-if="results.empty" class="text-center pa-3">No items found</div>
+                <div v-else-if="results.empty" class="text-center pa-3">未找到项目</div>
 
                 <v-list v-else dense @click="dialog = false">
                     <template v-if="results.apps && results.apps.length">

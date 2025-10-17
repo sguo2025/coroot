@@ -50,7 +50,7 @@ func renderLogs(ctx context.Context, ch *clickhouse.Client, w *model.World, quer
 	v := &Logs{}
 
 	if ch == nil {
-		v.Message = "Clickhouse integration is not configured."
+		v.Message = "Clickhouse 集成未配置。"
 		return v
 	}
 

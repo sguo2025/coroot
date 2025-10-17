@@ -7,18 +7,16 @@
         </template>
         <v-card class="pa-5">
             <div class="d-flex align-center text-h5 mb-4">
-                Node agent installation
+                节点代理安装
                 <v-spacer />
                 <v-btn icon @click="dialog = false"><v-icon>mdi-close</v-icon></v-btn>
             </div>
             <p>
-                <a href="https://github.com/coroot/coroot-node-agent" target="_blank">Coroot-node-agent</a> gathers metrics, traces, logs, and
-                profiles, and sends them to Coroot. To ingest telemetry data, the agent must have the address of the Coroot instance and the
-                capability to establish TCP connections with it.
+                    <a href="https://github.com/coroot/coroot-node-agent" target="_blank">Coroot-node-agent</a> 收集指标、追踪、日志和分析，并将其发送到根因分析先锋。为了接收遥测数据，代理必须知道根因分析先锋实例的地址，并能够与它建立TCP连接。
             </p>
 
             <v-form v-model="valid">
-                <div class="subtitle-1">Coroot URL:</div>
+                <div class="subtitle-1">根因分析先锋 URL:</div>
                 <v-text-field
                     v-model="coroot_url"
                     :rules="[$validators.notEmpty, $validators.isUrl]"
@@ -27,8 +25,8 @@
                     dense
                 />
                 <div class="subtitle-1">
-                    API Key (can be managed in the
-                    <router-link :to="{ name: 'project_settings' }"><span @click="dialog = false">project settings</span></router-link
+                    API 密钥 (可以在
+                    <router-link :to="{ name: 'project_settings' }"><span @click="dialog = false">工程设置</span></router-link
                     >):
                 </div>
                 <v-select
@@ -50,8 +48,7 @@
             <v-tabs-items v-model="tab">
                 <v-tab-item transition="none">
                     <p>
-                        This script downloads the latest version of the agent and installs it as a Systemd service. Additionally, it generates an
-                        uninstall script.
+                        这个脚本下载最新版本的代理并将其安装为 Systemd 服务。此外，它还会生成一个卸载脚本。
                     </p>
                     <Code :disabled="!valid">
                         <pre>
@@ -62,13 +59,13 @@ curl -sfL https://raw.githubusercontent.com/coroot/coroot-node-agent/main/instal
   sh -
                         </pre>
                     </Code>
-                    <p>You can read the agent log using the <var>journalctl</var> command:</p>
+                    <p>您可以使用 <var>journalctl</var> 命令读取代理日志:</p>
                     <Code>
                         <pre>
 sudo journalctl -u coroot-node-agent
                         </pre>
                     </Code>
-                    <p>To uninstall the agent run the command below:</p>
+                    <p>要卸载代理，请运行以下命令:</p>
                     <Code>
                         <pre>
 /usr/bin/coroot-node-agent-uninstall.sh
@@ -91,13 +88,13 @@ docker run --detach --name coroot-node-agent \
   --scrape-interval={{ scrape_interval }}
                         </pre>
                     </Code>
-                    <p>To read the agent log:</p>
+                    <p>要读取代理日志，请运行以下命令:</p>
                     <Code>
                         <pre>
 docker logs coroot-node-agent
                         </pre>
                     </Code>
-                    <p>To uninstall the agent run the command below:</p>
+                    <p>要卸载代理，请运行以下命令:</p>
                     <Code>
                         <pre>
 docker rm -f coroot-node-agent
@@ -105,7 +102,7 @@ docker rm -f coroot-node-agent
                     </Code>
                 </v-tab-item>
                 <v-tab-item transition="none">
-                    <p>Add the Coroot helm chart repo:</p>
+                    <p>添加根因分析先锋 Helm 仓库:</p>
 
                     <Code>
                         <pre>

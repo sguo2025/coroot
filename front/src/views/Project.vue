@@ -1,6 +1,6 @@
 <template>
     <div class="mx-auto">
-        <h1 class="text-h5 mb-5">Configuration</h1>
+        <h1 class="text-h5 mb-5">配置</h1>
 
         <v-tabs :value="tab" height="40" show-arrows slider-size="2">
             <v-tab v-for="t in tabs" :key="t.id" :to="{ params: { tab: t.id } }" :disabled="t.disabled" :tab-value="t.id" exact>
@@ -9,15 +9,15 @@
         </v-tabs>
 
         <template v-if="!tab">
-            <h2 class="text-h5 my-5">Project name</h2>
+            <h2 class="text-h5 my-5">工程名称</h2>
             <ProjectSettings :projectId="projectId" />
 
             <template v-if="projectId">
-                <h2 class="text-h5 mt-10 mb-5">Status</h2>
+                <h2 class="text-h5 mt-10 mb-5">状态</h2>
                 <ProjectStatus :projectId="projectId" />
 
                 <h2 class="text-h5 mt-10 mb-5">API keys</h2>
-                <p>The API keys below authorize Coroot's agents and other applications to write telemetry data for this project.</p>
+                <p></p>
                 <ProjectApiKeys />
 
                 <h2 class="text-h5 mt-10 mb-5">Danger zone</h2>
@@ -27,7 +27,7 @@
 
         <template v-if="tab === 'prometheus'">
             <h1 class="text-h5 my-5">
-                Prometheus integration
+                Prometheus 集成
                 <a href="https://docs.coroot.com/configuration/prometheus" target="_blank">
                     <v-icon>mdi-information-outline</v-icon>
                 </a>
@@ -37,32 +37,31 @@
 
         <template v-if="tab === 'clickhouse'">
             <h1 class="text-h5 my-5">
-                ClickHouse integration
+                ClickHouse 集成
                 <a href="https://docs.coroot.com/configuration/clickhouse" target="_blank">
                     <v-icon>mdi-information-outline</v-icon>
                 </a>
             </h1>
             <p>
-                Coroot stores
-                <a href="https://docs.coroot.com/logs" target="_blank">logs</a>, <a href="https://docs.coroot.com/tracing" target="_blank">traces</a>,
-                and <a href="https://docs.coroot.com/profiling" target="_blank">profiles</a> in the ClickHouse database.
+                根因分析先锋存储 <a href="https://docs.coroot.com/logs" target="_blank">日志</a>, <a href="https://docs.coroot.com/tracing" target="_blank">追踪</a>,
+                and <a href="https://docs.coroot.com/profiling" target="_blank">分析</a> in the ClickHouse 数据库。
             </p>
             <IntegrationClickhouse />
         </template>
 
         <template v-if="tab === 'ai'">
-            <h1 class="text-h5 my-5">AI-Powered Root Cause Analysis</h1>
+            <h1 class="text-h5 my-5">AI 驱动的根因分析</h1>
             <IntegrationAI />
         </template>
 
         <template v-if="tab === 'aws'">
-            <h1 class="text-h5 my-5">AWS integration</h1>
+            <h1 class="text-h5 my-5">AWS 集成</h1>
             <IntegrationAWS />
         </template>
 
         <template v-if="tab === 'inspections'">
             <h1 class="text-h5 my-5">
-                Inspection configs
+                检查配置
                 <a href="https://docs.coroot.com/inspections" target="_blank">
                     <v-icon>mdi-information-outline</v-icon>
                 </a>
@@ -72,45 +71,36 @@
 
         <template v-if="tab === 'applications'">
             <h2 class="text-h5 my-5" id="categories">
-                Application categories
+                应用分类
                 <a href="https://docs.coroot.com/configuration/application-categories" target="_blank">
                     <v-icon>mdi-information-outline</v-icon>
                 </a>
             </h2>
             <p>
-                You can organize your applications into groups by defining
-                <a href="https://en.wikipedia.org/wiki/Glob_(programming)" target="_blank">glob patterns</a>
-                in the <var>&lt;namespace&gt;/&lt;application_name&gt;</var> format. For Kubernetes applications, categories can also be defined by
-                annotating Kubernetes objects. Refer the
-                <a href="https://docs.coroot.com/configuration/application-categories" target="_blank">documentation</a> for more details.
+                您可以通过定义 <a href="https://en.wikipedia.org/wiki/Glob_(programming)" target="_blank">glob 模式</a> 将您的应用程序组织成组。对于 Kubernetes 应用程序，分类也可以通过注解 Kubernetes 对象来定义。请参考
+                <a href="https://docs.coroot.com/configuration/application-categories" target="_blank">文档</a> 了解更多详情。
             </p>
             <ApplicationCategories />
 
             <h2 class="text-h5 mt-10 mb-5" id="custom-applications">
-                Custom applications
+                自定义应用程序
                 <a href="https://docs.coroot.com/configuration/custom-applications" target="_blank">
                     <v-icon>mdi-information-outline</v-icon>
                 </a>
             </h2>
 
-            <p>Coroot groups individual containers into applications using the following approach:</p>
+            <p>根因分析先锋使用以下方法将单个容器分组为应用程序:</p>
 
             <ul class="mb-3">
-                <li><b>Kubernetes metadata</b>: Pods are grouped into Deployments, StatefulSets, etc.</li>
+                <li><b>Kubernetes metadata</b>: Pods 被分组为 Deployments, StatefulSets 等。</li>
                 <li>
-                    <b>Non-Kubernetes containers</b>: Containers such as Docker containers or Systemd units are grouped into applications by their
-                    names. For example, Systemd services named <var>mysql</var> on different hosts are grouped into a single application called
-                    <var>mysql</var>.
+                    <b>Non-Kubernetes containers</b>: 非 Kubernetes 容器，如 Docker 容器或 Systemd 单元，按其名称分组为应用程序。例如，不同主机上名为 <var>mysql</var> 的 Systemd 服务被分组为一个名为 <var>mysql</var> 的单个应用程序。
                 </li>
             </ul>
 
             <p>
-                This default approach works well in most cases. However, since no one knows your system better than you do, Coroot allows you to
-                manually adjust application groupings to better fit your specific needs. You can match desired application instances by defining
-                <a href="https://en.wikipedia.org/wiki/Glob_(programming)" target="_blank">glob patterns</a>
-                for <var>instance_name</var>. Note that this does not apply to Kubernetes applications, which can be customized by annotating
-                Kubernetes objects. Refer the
-                <a href="https://docs.coroot.com/configuration/custom-applications" target="_blank">documentation</a> for more details.
+                这种默认方法在大多数情况下效果很好。然而，由于没有人比您更了解您的系统，根因分析先锋允许您手动调整应用程序分组，以更好地满足您的特定需求。您可以通过定义 <a href="https://en.wikipedia.org/wiki/Glob_(programming)" target="_blank">glob 模式</a> 来匹配所需的应用程序实例。注意，这不适用于可以通过注解 Kubernetes 对象进行自定义的 Kubernetes 应用程序。请参考
+                <a href="https://docs.coroot.com/configuration/custom-applications" target="_blank">文档</a> 了解更多详情。
             </p>
 
             <CustomApplications />
@@ -118,7 +108,7 @@
 
         <template v-if="tab === 'notifications'">
             <h1 class="text-h5 my-5">
-                Notification integrations
+                通知集成
                 <a href="https://docs.coroot.com/alerting/slo-monitoring" target="_blank">
                     <v-icon>mdi-information-outline</v-icon>
                 </a>
@@ -209,16 +199,16 @@ export default {
         tabs() {
             const disabled = !this.projectId;
             let tabs = [
-                { id: undefined, name: 'General' },
+                { id: undefined, name: '通用' },
                 { id: 'prometheus', name: 'Prometheus', disabled },
                 { id: 'clickhouse', name: 'Clickhouse', disabled },
                 { id: 'ai', name: 'AI' },
                 { id: 'cloud', name: 'Coroot Cloud' },
                 { id: 'aws', name: 'AWS', disabled },
-                { id: 'inspections', name: 'Inspections', disabled },
-                { id: 'applications', name: 'Applications', disabled },
-                { id: 'notifications', name: 'Notifications', disabled },
-                { id: 'organization', name: 'Organization' },
+                { id: 'inspections', name: '检查', disabled },
+                { id: 'applications', name: '应用', disabled },
+                { id: 'notifications', name: '通知', disabled },
+                { id: 'organization', name: '组织' },
             ];
             if (this.$coroot.edition === 'Enterprise') {
                 tabs = tabs.filter((t) => t.id !== 'cloud');

@@ -2,12 +2,12 @@
     <Views :error="error" class="traces">
         <v-alert v-if="view.message" color="info" outlined text class="message">
             <template v-if="view.message === 'not_found'">
-                This page only shows traces from OpenTelemetry integrations, not from eBPF.
+                此页面仅显示 OpenTelemetry 集成，不显示 eBPF。
                 <div class="mt-2">
                     <OpenTelemetryIntegration color="primary">Integrate OpenTelemetry</OpenTelemetryIntegration>
                 </div>
             </template>
-            <template v-if="view.message === 'no_clickhouse'"> Clickhouse integration is not configured. </template>
+            <template v-if="view.message === 'no_clickhouse'"> Clickhouse 集成未配置。 </template>
         </v-alert>
 
         <template v-else>

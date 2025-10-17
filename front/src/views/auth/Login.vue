@@ -4,7 +4,7 @@
             <img :src="`${$coroot.base_path}static/icon.svg`" alt=":~#" height="80" />
         </div>
 
-        <h2 class="text-h4 my-5 text-center">Welcome to Coroot</h2>
+        <h2 class="text-h4 my-5 text-center"> 欢迎使用根因分析先锋 </h2>
 
         <v-form v-model="valid" @submit.prevent="post" ref="form">
             <v-alert v-if="error" color="red" icon="mdi-alert-octagon-outline" outlined text>
@@ -14,7 +14,7 @@
                 {{ message }}
             </v-alert>
 
-            <div class="font-weight-medium">Email</div>
+            <div class="font-weight-medium">邮箱</div>
             <v-text-field
                 outlined
                 dense
@@ -25,11 +25,11 @@
                 :disabled="set_admin_password"
             />
 
-            <div class="font-weight-medium">Password</div>
+            <div class="font-weight-medium">密码</div>
             <v-text-field outlined dense type="password" v-model="form.password" name="password" :rules="[$validators.notEmpty]" />
 
             <template v-if="set_admin_password">
-                <div class="font-weight-medium">Confirm password</div>
+                <div class="font-weight-medium">确认密码</div>
                 <v-text-field
                     outlined
                     dense
@@ -40,13 +40,13 @@
             </template>
 
             <v-btn block type="submit" :disabled="!valid" :loading="loading" color="primary" class="mt-5">
-                <template v-if="set_admin_password"> Set Admin Password and Log In </template>
+                <template v-if="set_admin_password"> 设置管理员密码并登录 </template>
                 <template v-else> Log In </template>
             </v-btn>
         </v-form>
 
         <div v-if="!set_admin_password" class="caption grey--text text-center mt-10">
-            Contact your Coroot administrator if you forgot your email or password.
+            如果您忘记了邮箱或密码，请联系管理员。
         </div>
     </div>
 </template>

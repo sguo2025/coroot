@@ -1,5 +1,5 @@
 <template>
-    <div class="pa-3 text-center grey--text">No data is available yet</div>
+    <div class="pa-3 text-center grey--text"> 暂无数据 </div>
 </template>
 
 <script>

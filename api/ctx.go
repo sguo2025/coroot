@@ -129,17 +129,17 @@ func renderStatus(p *db.Project, cacheStatus *cache.Status, w *model.World, glob
 	switch {
 	case promCfg.Url == "" && !promCfg.UseClickHouse:
 		res.Prometheus.Status = model.WARNING
-		res.Prometheus.Message = "Prometheus is not configured."
+		res.Prometheus.Message = "Prometheus 没有配置."
 		res.Prometheus.Action = "configure"
 	case cacheStatus != nil && cacheStatus.Error != "":
 		res.Prometheus.Status = model.WARNING
-		res.Prometheus.Message = "An error has been occurred while querying Prometheus:"
+		res.Prometheus.Message = "查询 Prometheus 时发生错误:"
 		res.Prometheus.Error = cacheStatus.Error
 		res.Prometheus.Action = "configure"
 	case cacheStatus != nil && cacheStatus.LagMax > 5*refreshInterval:
 		lag := utils.FormatDuration(cacheStatus.LagAvg, 1)
 		res.Prometheus.Status = model.WARNING
-		res.Prometheus.Message = fmt.Sprintf("The Prometheus cache lag is %s, likely due to a restart or upgrade. Synchronization is in progress.", lag)
+		res.Prometheus.Message = fmt.Sprintf("Prometheus 缓存延迟为 %s, 可能由于重启或升级导致。同步正在进行中。", lag)
 		res.Prometheus.Action = "wait"
 	}
 

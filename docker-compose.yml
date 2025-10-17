@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  clickhouse:
+    image: yandex/clickhouse-server:21.8
+    container_name: coroot-clickhouse
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+    restart: unless-stopped
+
+  coroot:
+    image: coroot/coroot:latest
+    container_name: coroot
+    ports:
+      - "3000:3000"
+    environment:
+      - CLICKHOUSE_DSN=tcp://clickhouse:9000
+    depends_on:
+      - clickhouse
+    links:
+      - clickhouse
+    restart: unless-stopped
+
+volumes:
+  clickhouse_data:

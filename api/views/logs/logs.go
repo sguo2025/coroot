@@ -94,7 +94,7 @@ func Render(ctx context.Context, ch *clickhouse.Client, app *model.Application, 
 
 	if ch == nil {
 		v.Status = model.UNKNOWN
-		v.Message = "Clickhouse integration is not configured"
+		v.Message = "ClickHouse 集成未配置"
 		v.View = viewPatterns
 		renderPatterns(v, app, w.Ctx)
 		return v

@@ -1,10 +1,10 @@
 <template>
     <v-form v-if="form" v-model="valid" ref="form" style="max-width: 800px">
         <v-alert v-if="readonly" color="primary" outlined text>
-            This project is defined through the config and cannot be modified via the UI.
+            工程是通过配置定义的，无法通过UI修改。
         </v-alert>
         <div class="caption">
-            Project is a separate infrastructure or environment, e.g. <var>production</var>, <var>staging</var> or <var>prod-us-west</var>.
+            工程是独立的基础设施或环境，例如 <var>production</var>, <var>staging</var> 或 <var>prod-us-west</var>.
         </div>
         <v-form v-model="valid" :disabled="readonly" @submit.prevent="save">
             <v-text-field v-model="form.name" :rules="[$validators.isSlug]" outlined dense required />
@@ -15,7 +15,7 @@
             <v-alert v-if="message" color="green" outlined text>
                 {{ message }}
             </v-alert>
-            <v-btn block color="primary" @click="save" :disabled="readonly || !valid" :loading="loading">Save</v-btn>
+            <v-btn block color="primary" @click="save" :disabled="readonly || !valid" :loading="loading">保存</v-btn>
         </v-form>
     </v-form>
 </template>
