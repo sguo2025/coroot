@@ -1,10 +1,12 @@
 # ------------------------------
-# 构建阶段（缓存化）
+# 构建阶段
 # ------------------------------
-FROM golang:1.23-alpine AS backend-builder
+FROM golang:1.23-bullseye AS backend-builder
 
 # 安装构建依赖
-RUN apk add --no-cache git build-base liblz4-dev bash ca-certificates
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git build-essential liblz4-dev bash ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 # 设置 Go 代理与缓存目录
 ENV GOPROXY=https://goproxy.cn,direct
@@ -18,7 +20,7 @@ WORKDIR /app
 COPY go.mod .
 COPY go.sum .
 
-# 下载依赖（会写入缓存目录）
+# 下载依赖（国内代理加速）
 RUN go mod tidy && go mod download
 
 # 复制源码
@@ -45,6 +47,7 @@ LABEL name="coroot" \
 COPY LICENSE /licenses/LICENSE
 COPY --from=backend-builder /app/coroot /usr/bin/coroot
 
+# 创建数据目录
 RUN mkdir /data && chown 65534:65534 /data
 
 USER 65534:65534
@@ -52,4 +55,3 @@ VOLUME /data
 EXPOSE 8080
 
 ENTRYPOINT ["/usr/bin/coroot"]
-      
