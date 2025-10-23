@@ -1,4 +1,11 @@
+# FROM golang:1.23-bullseye AS backend-builder
+
+# 构建阶段：使用官方 golang 镜像编译
 FROM golang:1.23-bullseye AS backend-builder
+
+# 设置国内代理，加速 go mod 下载
+ENV GOPROXY=https://goproxy.cn,direct
+
 RUN apt update && apt install -y liblz4-dev
 WORKDIR /tmp/src
 COPY go.mod .
