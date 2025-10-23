@@ -11,11 +11,14 @@ volumes:
 services:
   coroot:
     restart: always
-    image: ghcr.io/coroot/coroot${LICENSE_KEY:+-ee} # set 'coroot-ee' as the image if LICENSE_KEY is defined
-    pull_policy: always
+    # image: ghcr.io/coroot/coroot${LICENSE_KEY:+-ee} # set 'coroot-ee' as the image if LICENSE_KEY is defined
+    pull_policy: never
     user: root
     volumes:
       - coroot_data:/data
+    build:
+      context: ../
+      dockerfile: Dockerfile
     ports:
       - 8080:8080
     command:
