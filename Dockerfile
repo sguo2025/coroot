@@ -1,5 +1,5 @@
 # ------------------------------
-# 构建阶段
+# 构建阶段（缓存化）
 # ------------------------------
 FROM golang:1.23-alpine AS backend-builder
 
@@ -10,6 +10,7 @@ RUN apk add --no-cache git build-base liblz4-dev bash ca-certificates
 ENV GOPROXY=https://goproxy.cn,direct
 ENV GOCACHE=/go/cache
 ENV GOPATH=/go
+ENV PATH=$GOPATH/bin:$PATH
 
 WORKDIR /app
 
@@ -17,15 +18,15 @@ WORKDIR /app
 COPY go.mod .
 COPY go.sum .
 
-# 生成 vendor 目录（离线模式）
-RUN go mod tidy && go mod vendor
+# 下载依赖（会写入缓存目录）
+RUN go mod tidy && go mod download
 
 # 复制源码
 COPY . .
 
 ARG VERSION=unknown
-# 使用 vendor 目录构建，避免每次下载依赖
-RUN go build -mod=vendor -ldflags "-X main.version=$VERSION" -o coroot .
+# 构建可执行文件
+RUN go build -mod=readonly -ldflags "-X main.version=$VERSION" -o coroot .
 
 # ------------------------------
 # 运行阶段
@@ -42,11 +43,8 @@ LABEL name="coroot" \
       description="Coroot Community Edition container image."
 
 COPY LICENSE /licenses/LICENSE
-
-# 复制可执行文件
 COPY --from=backend-builder /app/coroot /usr/bin/coroot
 
-# 创建数据目录
 RUN mkdir /data && chown 65534:65534 /data
 
 USER 65534:65534
