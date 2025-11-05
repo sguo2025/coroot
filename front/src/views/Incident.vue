@@ -15,25 +15,25 @@
 
                 <div class="d-flex flex-wrap" style="gap: 16px; row-gap: 8px">
                     <div>
-                        <span class="field-name">Started</span>:
+                        <span class="field-name">开始时间</span>:
                         <span>
                             {{ $format.date(incident.opened_at, '{MMM} {DD}, {HH}:{mm}:{ss}') }}
                         </span>
-                        <span> ({{ $format.timeSinceNow(incident.opened_at) }} ago) </span>
+                        <span> ({{ $format.timeSinceNow(incident.opened_at) }} 前) </span>
                     </div>
 
                     <div>
-                        <span class="field-name">Resolved</span>:
+                        <span class="field-name">已解决</span>:
                         <span>
                             <template v-if="incident.resolved_at">
                                 {{ $format.date(incident.resolved_at, '{MMM} {DD}, {HH}:{mm}:{ss}') }}
                             </template>
-                            <span v-else>still open</span>
+                            <span v-else>仍未解决</span>
                         </span>
                     </div>
 
                     <div>
-                        <span class="field-name">Duration</span>:
+                        <span class="field-name">持续时间</span>:
                         <span>{{ $format.durationPretty(incident.duration) }}</span>
                     </div>
 
@@ -50,12 +50,12 @@
                     <div>
                         <span class="field-name"> 根本原因分析: </span>
                         <template v-if="incident.rca">
-                            <span v-if="incident.rca.status === 'OK'" class="green--text">Done</span>
+                            <span v-if="incident.rca.status === 'OK'" class="green--text">完成</span>
                             <v-tooltip v-else-if="incident.rca.status === 'Failed'" bottom>
                                 <template #activator="{ on }">
-                                    <span v-on="on" class="red--text">Failed</span>
+                                    <span v-on="on" class="red--text">失败</span>
                                 </template>
-                                <v-card class="pa-2"> Failed: {{ incident.rca.error }} </v-card>
+                                <v-card class="pa-2"> 失败: {{ incident.rca.error }} </v-card>
                             </v-tooltip>
                             <span v-else class="grey--text">{{ incident.rca.status }}</span>
                         </template>
