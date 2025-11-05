@@ -44,7 +44,7 @@ services:
       - /sys/fs/cgroup:/host/sys/fs/cgroup
       - node_agent_data:/data
     command:
-      - '--collector-endpoint=http://coroot:8080'
+      - '--collector-endpoint=http://127.0.0.1:8080'
       - '--cgroupfs-root=/host/sys/fs/cgroup'
       - '--wal-dir=/data'
 
