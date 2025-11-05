@@ -23,9 +23,9 @@ services:
       - 8080:8080
     command:
       - '--data-dir=/data'
-      - '--bootstrap-prometheus-url=http://prometheus:9090'
+      - '--bootstrap-prometheus-url=http://127.0.0.1:9090'
       - '--bootstrap-refresh-interval=15s'
-      - '--bootstrap-clickhouse-address=clickhouse:9000'
+      - '--bootstrap-clickhouse-address=127.0.0.1:9000'
     environment:
       - LICENSE_KEY=${LICENSE_KEY:-}
     depends_on:
@@ -55,7 +55,7 @@ services:
     volumes:
       - cluster_agent_data:/data
     command:
-      - '--coroot-url=http://coroot:8080'
+      - '--coroot-url=http://127.0.0.1:8080'
       - '--metrics-scrape-interval=15s'
       - '--metrics-wal-dir=/data'
     depends_on:
