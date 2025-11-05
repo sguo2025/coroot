@@ -38,7 +38,7 @@
                     </div>
 
                     <div>
-                        <span class="field-name">Application</span>:
+                        <span class="field-name">应用</span>:
                         <router-link
                             :to="{ name: 'overview', params: { view: 'applications', id: incident.application_id }, query: $utils.contextQuery() }"
                             class="name"
@@ -48,7 +48,7 @@
                     </div>
 
                     <div>
-                        <span class="field-name"> Root Cause Analysis: </span>
+                        <span class="field-name"> 根本原因分析: </span>
                         <template v-if="incident.rca">
                             <span v-if="incident.rca.status === 'OK'" class="green--text">Done</span>
                             <v-tooltip v-else-if="incident.rca.status === 'Failed'" bottom>
@@ -71,11 +71,11 @@
                 <v-simple-table dense class="mt-5 table">
                     <thead>
                         <tr>
-                            <th>Service Level Objective (SLO)</th>
-                            <th>Objective</th>
-                            <th>Compliance</th>
+                            <th>服务水平指标 (SLO)</th>
+                            <th>目标</th>
+                            <th>合规</th>
                             <th>
-                                Error budget burn rate
+                                错误预算燃烧率
                                 <a href="https://docs.coroot.com/alerting/slo-monitoring" target="_blank" class="ml-1"
                                     ><v-icon small>mdi-information-outline</v-icon></a
                                 >
@@ -84,7 +84,7 @@
                     </thead>
                     <tbody>
                         <tr v-if="incident.availability_slo">
-                            <td>Availability</td>
+                            <td>可用性</td>
                             <td>
                                 {{ incident.availability_slo.objective }}
                                 <v-btn small icon @click="edit('SLOAvailability', 'Availability')"><v-icon small>mdi-pencil</v-icon></v-btn>
@@ -112,7 +112,7 @@
                             </td>
                         </tr>
                         <tr v-if="incident.latency_slo">
-                            <td>Latency</td>
+                            <td>延迟</td>
                             <td>
                                 {{ incident.latency_slo.objective }}
                                 <v-btn small icon @click="edit('SLOLatency', 'Latency')"><v-icon small>mdi-pencil</v-icon></v-btn>
@@ -153,13 +153,13 @@
             <template v-if="view === 'overview'">
                 <div v-if="incident.rca">
                     <template v-if="incident.rca.root_cause">
-                        <div class="mt-5 mb-3 text-h6"><v-icon color="red">mdi-fire</v-icon> Root Cause</div>
+                        <div class="mt-5 mb-3 text-h6"><v-icon color="red">mdi-fire</v-icon> 根本原因</div>
                         <Markdown :src="incident.rca.root_cause" :widgets="[]" />
 
                         <template v-if="incident.rca.detailed_root_cause_analysis">
                             <div>
                                 <a @click="toggle_rca_details">
-                                    Show {{ show_details ? 'less' : 'more' }} details
+                                    {{ show_details ? '显示更少' : '显示更多' }} 详情
                                     <v-icon v-if="show_details">mdi-chevron-up</v-icon>
                                     <v-icon v-else>mdi-chevron-down</v-icon>
                                 </a>
@@ -177,12 +177,12 @@
                     </template>
 
                     <template v-if="incident.rca.immediate_fixes">
-                        <div class="mt-5 mb-3 text-h6"><v-icon color="red">mdi-fire-extinguisher</v-icon> Immediate Fixes</div>
+                        <div class="mt-5 mb-3 text-h6"><v-icon color="red">mdi-fire-extinguisher</v-icon> 立即修复</div>
                         <Markdown :src="incident.rca.immediate_fixes" :widgets="[]" />
                     </template>
                 </div>
                 <template v-if="incident.widgets">
-                    <div class="mt-5 mb-3 text-h6"><v-icon color="red">mdi-chart-bar</v-icon> Service Level Indicators (SLIs)</div>
+                    <div class="mt-5 mb-3 text-h6"><v-icon color="red">mdi-chart-bar</v-icon> 服务水平指标 (SLIs)</div>
                     <div class="d-flex flex-wrap mt-5">
                         <Widget
                             v-for="w in incident.widgets"
