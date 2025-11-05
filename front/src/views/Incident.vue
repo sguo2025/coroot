@@ -230,12 +230,12 @@ export default {
             return rates.find((br) => br.severity !== 'ok') || rates[0];
         },
         view() {
-            return this.$route.query.view || 'overview';
+            return this.$route.query.view || '概览';
         },
         views() {
             return [
-                { name: 'overview', title: 'overview', icon: 'mdi-format-list-checkbox' },
-                { name: 'traces', title: 'traces', icon: 'mdi-chart-timeline' },
+                { name: 'overview', title: '概览', icon: 'mdi-format-list-checkbox' },
+                { name: 'traces', title: '追踪', icon: 'mdi-chart-timeline' },
             ];
         },
     },
