@@ -40,6 +40,8 @@ services:
       - "8081:8081"
     environment:
       - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m
+    depends_on:
+      - coroot 
 
   node-agent:
     restart: always
