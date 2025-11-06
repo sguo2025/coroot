@@ -1,0 +1,11 @@
+.idea/misc.xml
+*.xml
+.idea/$PROJECT_FILE$
+src/.DS_Store
+.idea/httpRequests/2025-10-21T111933.500.json
+.idea/httpRequests/2025-10-21T112022.500.json
+.idea/httpRequests/http-client.cookies
+.idea/httpRequests/http-requests-log.http
+target/classes/application.yml
+target/classes/com/example/demo/controller/ExceptionController.class
+target/classes/com/example/demo/ExceptionSimulatorApplication.class
