@@ -31,6 +31,15 @@ services:
     depends_on:
       - clickhouse
       - prometheus
+      
+  springboot-exception-simulator:
+    build:
+      context: ../springboot-exception-simulator
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m
 
   node-agent:
     restart: always
