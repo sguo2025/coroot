@@ -3,20 +3,20 @@
         <v-card class="pa-5">
             <div class="d-flex align-center font-weight-medium mb-4">
                 <template v-if="check.id === 'SLOAvailability' || check.id === 'SLOLatency'">
-                    Configure the "{{ check.title }}" inspection
+                    配置 "{{ check.title }}" 检查
                     <v-btn v-if="form && !form.default" small icon @click="confirmation = true"><v-icon small>mdi-trash-can-outline</v-icon></v-btn>
                     <v-overlay :value="confirmation" absolute opacity="0.8">
-                        <div>Are you sure you want to delete your override for the "{{ check.title }}" inspection?</div>
+                        <div>确定要删除 "{{ check.title }}" 检查的覆盖吗？</div>
                         <div class="mt-5 d-flex">
                             <v-spacer />
-                            <v-btn @click="confirmation = false" small color="info">Cancel</v-btn>
-                            <v-btn @click="del" :loading="deleting" color="error" class="ml-3" small>Delete</v-btn>
+                            <v-btn @click="confirmation = false" small color="info">取消</v-btn>
+                            <v-btn @click="del" :loading="deleting" color="error" class="ml-3" small>删除</v-btn>
                         </div>
                     </v-overlay>
                 </template>
-                <template v-else> Adjust the threshold for the "{{ check.title }}" inspection </template>
+                <template v-else> 调整 "{{ check.title }}" 检查的阈值</template>
                 <v-spacer />
-                <v-btn icon @click="emitValue(false)"><v-icon>mdi-close</v-icon></v-btn>
+                <v-btn icon @click="emitValue(false)"><v-icon>mdi-close</v-icon>关闭</v-btn>
             </div>
 
             <v-form v-if="form" v-model="valid">
@@ -25,7 +25,7 @@
                 <CheckConfigForm v-else :form="form" :check="check" :appId="appId" />
 
                 <div v-if="check.id.startsWith('SLO')" class="my-3">
-                    Alerting:
+                    告警:
                     <div>
                         <ul v-if="integrations && integrations.length">
                             <li v-for="i in integrations">
@@ -33,7 +33,7 @@
                                 <span v-if="i.details" class="grey--text"> ({{ i.details }})</span>
                             </li>
                         </ul>
-                        <div v-else class="grey--text">No notification integrations configured.</div>
+                        <div v-else class="grey--text">没有配置通知集成。</div>
                         <v-btn
                             color="primary"
                             small
@@ -41,7 +41,7 @@
                             :disabled="appId === '::'"
                             class="mt-1"
                         >
-                            Configure integrations
+                            配置通知集成
                         </v-btn>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 <v-alert v-if="message" color="green" outlined text class="my-3">
                     {{ message }}
                 </v-alert>
-                <v-btn block color="primary" @click="save" :disabled="!(valid && changed)" :loading="saving" class="mt-5">Save</v-btn>
+                <v-btn block color="primary" @click="save" :disabled="!(valid && changed)" :loading="saving" class="mt-5">保存</v-btn>
             </v-form>
         </v-card>
     </v-dialog>
