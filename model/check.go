@@ -62,30 +62,30 @@ type CheckConfig struct {
 var Checks = struct {
 	index map[CheckId]*CheckConfig
 
-	SLOAvailability            CheckConfig
-	SLOLatency                 CheckConfig
-	CPUNode                    CheckConfig
-	CPUContainer               CheckConfig
-	MemoryOOM                  CheckConfig
-	MemoryLeakPercent          CheckConfig
-	MemoryPressure             CheckConfig
-	StorageSpace               CheckConfig
-	StorageIOLoad              CheckConfig
-	NetworkRTT                 CheckConfig
-	NetworkConnectivity        CheckConfig
-	NetworkTCPConnections      CheckConfig
-	InstanceAvailability       CheckConfig
-	DeploymentStatus           CheckConfig
-	InstanceRestarts           CheckConfig
-	RedisAvailability          CheckConfig
-	RedisLatency               CheckConfig
-	MongodbAvailability        CheckConfig
-	MongodbReplicationLag      CheckConfig
-	MemcachedAvailability      CheckConfig
-	PostgresAvailability       CheckConfig
-	PostgresLatency            CheckConfig
-	PostgresReplicationLag     CheckConfig
-	PostgresConnections        CheckConfig
+	SLOAvailability       CheckConfig
+	SLOLatency            CheckConfig
+	CPUNode               CheckConfig
+	CPUContainer          CheckConfig
+	MemoryOOM             CheckConfig
+	MemoryLeakPercent     CheckConfig
+	MemoryPressure        CheckConfig
+	StorageSpace          CheckConfig
+	StorageIOLoad         CheckConfig
+	NetworkRTT            CheckConfig
+	NetworkConnectivity   CheckConfig
+	NetworkTCPConnections CheckConfig
+	InstanceAvailability  CheckConfig
+	DeploymentStatus      CheckConfig
+	InstanceRestarts      CheckConfig
+	RedisAvailability     CheckConfig
+	RedisLatency          CheckConfig
+	// MongodbAvailability        CheckConfig
+	// MongodbReplicationLag      CheckConfig
+	// MemcachedAvailability      CheckConfig
+	// PostgresAvailability       CheckConfig
+	// PostgresLatency            CheckConfig
+	// PostgresReplicationLag     CheckConfig
+	// PostgresConnections        CheckConfig
 	LogErrors                  CheckConfig
 	JvmAvailability            CheckConfig
 	JvmSafepointTime           CheckConfig
