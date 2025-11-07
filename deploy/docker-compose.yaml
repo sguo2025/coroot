@@ -37,7 +37,7 @@ services:
       context: ../springboot-exception-simulator
       dockerfile: Dockerfile
     ports:
-      - "8081:8081"
+      - "8888:8888"
     environment:
       - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m
     depends_on:
