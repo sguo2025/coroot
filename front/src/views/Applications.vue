@@ -15,7 +15,7 @@
             mobile-breakpoint="0"
             :items-per-page="50"
             :items="items"
-            no-data-text="No applications found"
+            no-data-text="无应用数据"
             :headers="[
                 { value: 'application', text: 'Application', sortable: false },
                 { value: 'type', text: 'Type', sortable: false },
