@@ -33,16 +33,16 @@ services:
       - clickhouse
       - prometheus
       
-  springboot-exception-simulator:
-    build:
-      context: ../springboot-exception-simulator
-      dockerfile: Dockerfile
-    ports:
-      - "8888:8888"
-    environment:
-      - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m
-    depends_on:
-      - coroot 
+  # springboot-exception-simulator:
+  #   build:
+  #     context: ../springboot-exception-simulator
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8888:8888"
+  #   environment:
+  #     - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m
+  #   depends_on:
+  #     - coroot 
 
   node-agent:
     restart: always
