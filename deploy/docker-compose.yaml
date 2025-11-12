@@ -28,6 +28,7 @@ services:
       - '--bootstrap-clickhouse-address=clickhouse:9000'
     environment:
       - LICENSE_KEY=${LICENSE_KEY:-}
+      - PROMETHEUS_REMOTE_WRITE_URL=http://prometheus:9090/api/v1/write
     depends_on:
       - clickhouse
       - prometheus
