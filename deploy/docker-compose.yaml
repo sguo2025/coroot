@@ -46,7 +46,7 @@ services:
     environment:
       - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m -javaagent:/app/opentelemetry-javaagent.jar
       - OTEL_SERVICE_NAME=springboot-exception-simulator
-      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://coroot:8080/v1/traces
+      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://13.49.159.64:8080/v1/traces
       - OTEL_METRICS_EXPORTER=none
       - OTEL_LOGS_EXPORTER=none      
     depends_on:
