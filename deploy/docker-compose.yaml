@@ -44,11 +44,13 @@ services:
     volumes:
       - simulator_data:/var/log/simulator
     environment:
-      - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m -javaagent:/app/opentelemetry-javaagent.jar
-      - OTEL_SERVICE_NAME=springboot-exception-simulator
-      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://13.49.159.64:8080/v1/traces
-      - OTEL_METRICS_EXPORTER=none
-      - OTEL_LOGS_EXPORTER=none      
+      - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m -javaagent:/app/opentelemetry-javaagent.jar   
+      - OTEL_SERVICE_NAME="java" 
+      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="http://13.49.159.64:8080/v1/traces" 
+      - OTEL_EXPORTER_OTLP_LOGS_ENDPOINT="http://13.49.159.64:8080/v1/logs" 
+      - OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf" 
+      - OTEL_METRICS_EXPORTER="none" 
+      - OTEL_EXPORTER_OTLP_HEADERS="x-api-key=LNNcSb6Y4OU2akp4OOP0Gn9IGMkKQZVO"
     depends_on:
       - coroot 
     logging:
