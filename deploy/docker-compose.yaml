@@ -43,6 +43,8 @@ services:
       - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m
     depends_on:
       - coroot 
+    logging:
+      driver: journald
 
   # node-agent:
   #   restart: always
