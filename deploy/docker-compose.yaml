@@ -5,6 +5,7 @@ volumes:
   clickhouse_data: {}
   clickhouse_logs: {}
   coroot_data: {}
+  simulator_data: {}
   node_agent_data: {}
   cluster_agent_data: {}
 
@@ -39,6 +40,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8888:8888"
+    user: root
+    volumes:
+      - simulator_data:/var/log/simulator
     environment:
       - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m
     depends_on:
@@ -47,7 +51,7 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
-        max-file: "3"  
+        max-file: "3"    
 
   # node-agent:
   #   restart: always
