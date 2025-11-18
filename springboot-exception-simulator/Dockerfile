@@ -14,7 +14,7 @@ ENV JAVA_OPTS="-XX:+PreserveFramePointer -javaagent:/app/opentelemetry-javaagent
 
 # 可通过环境变量灵活设置 OpenTelemetry 配置
 ENV OTEL_SERVICE_NAME=my-java-service
-ENV OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://http://13.49.159.64:8080/v1/traces
+ENV OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://13.49.159.64:8080/v1/traces
 ENV OTEL_METRICS_EXPORTER=none
 ENV OTEL_LOGS_EXPORTER=none
 
