@@ -33,45 +33,45 @@ services:
       - clickhouse
       - prometheus
       
-  # springboot-exception-simulator:
-  #   build:
-  #     context: ../springboot-exception-simulator
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8888:8888"
-  #   environment:
-  #     - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m
-  #   depends_on:
-  #     - coroot 
-
-  node-agent:
-    restart: always
-    image: ghcr.io/coroot/coroot-node-agent
-    pull_policy: always
-    privileged: true
-    pid: "host"
-    volumes:
-      - /sys/kernel/tracing:/sys/kernel/tracing
-      - /sys/kernel/debug:/sys/kernel/debug
-      - /sys/fs/cgroup:/host/sys/fs/cgroup
-      - node_agent_data:/data
-    command:
-      - '--collector-endpoint=http://coroot:8080'
-      - '--cgroupfs-root=/host/sys/fs/cgroup'
-      - '--wal-dir=/data'
-
-  cluster-agent:
-    restart: always
-    image: ghcr.io/coroot/coroot-cluster-agent
-    pull_policy: always
-    volumes:
-      - cluster_agent_data:/data
-    command:
-      - '--coroot-url=http://coroot:8080'
-      - '--metrics-scrape-interval=15s'
-      - '--metrics-wal-dir=/data'
+  springboot-exception-simulator:
+    build:
+      context: ../springboot-exception-simulator
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    environment:
+      - JAVA_OPTS=-XX:+PreserveFramePointer -Xms256m -Xmx512m
     depends_on:
-      - coroot
+      - coroot 
+
+  # node-agent:
+  #   restart: always
+  #   image: ghcr.io/coroot/coroot-node-agent
+  #   pull_policy: always
+  #   privileged: true
+  #   pid: "host"
+  #   volumes:
+  #     - /sys/kernel/tracing:/sys/kernel/tracing
+  #     - /sys/kernel/debug:/sys/kernel/debug
+  #     - /sys/fs/cgroup:/host/sys/fs/cgroup
+  #     - node_agent_data:/data
+  #   command:
+  #     - '--collector-endpoint=http://coroot:8080'
+  #     - '--cgroupfs-root=/host/sys/fs/cgroup'
+  #     - '--wal-dir=/data'
+
+  # cluster-agent:
+  #   restart: always
+  #   image: ghcr.io/coroot/coroot-cluster-agent
+  #   pull_policy: always
+  #   volumes:
+  #     - cluster_agent_data:/data
+  #   command:
+  #     - '--coroot-url=http://coroot:8080'
+  #     - '--metrics-scrape-interval=15s'
+  #     - '--metrics-wal-dir=/data'
+  #   depends_on:
+  #     - coroot
 
   prometheus:
     restart: always
