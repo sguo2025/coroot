@@ -28,7 +28,7 @@ services:
       - '--bootstrap-refresh-interval=15s'
       - '--bootstrap-clickhouse-address=clickhouse:9000'
     environment:
-      - LICENSE_KEY=COROOT-D09B116E-83CF-4385-B51C-CF46507D4A1A
+      - LICENSE_KEY="COROOT-D09B116E-83CF-4385-B51C-CF46507D4A1A"
       - PROMETHEUS_REMOTE_WRITE_URL=http://prometheus:9090/api/v1/write
     depends_on:
       - clickhouse
